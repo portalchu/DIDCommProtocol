@@ -9,6 +9,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int num;
 
+        String serverDid = "did:example:alice";
+
         try {
             while (true)
             {

@@ -4,6 +4,8 @@ import org.didcommx.didcomm.DIDComm;
 import org.didcommx.didcomm.message.Message;
 import org.didcommx.didcomm.model.PackEncryptedParams;
 import org.didcommx.didcomm.model.PackEncryptedResult;
+import org.didcommx.didcomm.model.UnpackParams;
+import org.didcommx.didcomm.model.UnpackResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,13 +15,11 @@ import java.util.Map;
 public class DIDCommManager {
 
     public String did;
-    public String didKey;
 
     private DIDComm didComm;
 
-    public DIDCommManager(String did, String didKey) {
+    public DIDCommManager(String did) {
         this.did = did;
-        this.didKey = didKey;
 
         DIDDocResolverMock didDocResolverMock = new DIDDocResolverMock();
         didDocResolverMock.SetDIDDoc();
@@ -58,5 +58,19 @@ public class DIDCommManager {
         System.out.println("packEncryptedResult : " + packEncryptedResult.toString());
 
         return packEncryptedResult.getPackedMessage();
+    }
+
+    public String messageDecryption (String message) throws Exception {
+
+        UnpackParams unpackParams = new UnpackParams.Builder(message)
+                .build();
+
+        UnpackResult unpackResult = didComm.unpack(unpackParams);
+
+        String unpackMessage = unpackResult.getMessage().toString();
+
+        System.out.println("UnPack Message : " + unpackMessage);
+
+        return unpackMessage;
     }
 }

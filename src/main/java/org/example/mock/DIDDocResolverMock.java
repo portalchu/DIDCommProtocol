@@ -110,8 +110,8 @@ public class DIDDocResolverMock implements DIDDocResolver {
         keyAgreementList.add("did:example:alice#key-5");
 
         List<String> authentications = new ArrayList<>();
-        //authentications.add("did:example:alice#key-1");
-        //authentications.add("did:example:alice#key-3");
+        authentications.add("did:example:alice#key-1");
+        authentications.add("did:example:alice#key-3");
         authentications.add("did:example:alice#key-6");
 
         didDoc1 = new DIDDoc(
