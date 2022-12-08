@@ -124,8 +124,6 @@ public class DIDDocResolverMock implements DIDDocResolver {
         verificationMethodList.add(AliceMethod3);
         verificationMethodList.add(AliceMethod4);
         verificationMethodList.add(AliceMethod6);
-        verificationMethodList.add(BobMethod1);
-        verificationMethodList.add(BobMethod2);
 
         List<DIDCommService> didCommServiceList = new ArrayList<>();
 

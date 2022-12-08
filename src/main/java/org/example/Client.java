@@ -51,6 +51,8 @@ public class Client {
                 if ("exit".equals(data))
                     break;
 
+                // DIDComm 적용 위치?
+
                 pw.println(data);
 
                 data = br.readLine();

@@ -10,6 +10,7 @@ public class Main {
         int num;
 
         String serverDid = "did:example:alice";
+        String clientDid = "did:example:bob";
 
         try {
             while (true)

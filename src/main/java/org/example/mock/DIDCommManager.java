@@ -24,10 +24,24 @@ public class DIDCommManager {
         DIDDocResolverMock didDocResolverMock = new DIDDocResolverMock();
         didDocResolverMock.SetDIDDoc();
 
-        SecretResolverInMemoryMock secretResolverInMemoryMock = new SecretResolverInMemoryMock();
-        secretResolverInMemoryMock.SetSecret();
-
-        this.didComm = new DIDComm(didDocResolverMock, secretResolverInMemoryMock);
+        if(this.did == "did:example:bob")
+        {
+            BobSecretResolverMock secretResolverInMemoryMock = new BobSecretResolverMock();
+            secretResolverInMemoryMock.SetSecret();
+            this.didComm = new DIDComm(didDocResolverMock, secretResolverInMemoryMock);
+        }
+        if(this.did == "did:example:alice")
+        {
+            AliceSecretResolverMock secretResolverInMemoryMock = new AliceSecretResolverMock();
+            secretResolverInMemoryMock.SetSecret();
+            this.didComm = new DIDComm(didDocResolverMock, secretResolverInMemoryMock);
+        }
+        else
+        {
+            SecretResolverInMemoryMock secretResolverInMemoryMock = new SecretResolverInMemoryMock();
+            secretResolverInMemoryMock.SetSecret();
+            this.didComm = new DIDComm(didDocResolverMock, secretResolverInMemoryMock);
+        }
     }
 
     public String messageEncryption (String resiverDid, String message) throws Exception {
