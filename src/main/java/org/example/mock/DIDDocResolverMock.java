@@ -93,6 +93,30 @@ public class DIDDocResolverMock implements DIDDocResolver {
                 "did:example:alice#key-6"
         );
 
+        VerificationMethod BobMethod1 = new VerificationMethod(
+                "did:example:bob#key-1",
+                VerificationMethodType.JSON_WEB_KEY_2020,
+                new VerificationMaterial(
+                        VerificationMaterialFormat.JWK,
+                        "{\"kty\":\"OKP\"," +
+                                "\"crv\":\"Ed25519\"," +
+                                "\"x\":\"n7R4go0dfPvU2MVD56nz-osbSfYxi0sb7di-oKcsX7k\"}"
+                ),
+                "did:example:bob#key-1"
+        );
+
+        VerificationMethod BobMethod2 = new VerificationMethod(
+                "did:example:bob#key-2",
+                VerificationMethodType.JSON_WEB_KEY_2020,
+                new VerificationMaterial(
+                        VerificationMaterialFormat.JWK,
+                        "{\"kty\":\"OKP\"," +
+                                "\"crv\":\"X25519\"," +
+                                "\"x\":\"gL9h8PIoyDbWYqPJuV9oLlq_Y4jOHVFO2EspbgO3fyE\"}"
+                ),
+                "did:example:alice#key-2"
+        );
+
         List<VerificationMethod> verificationMethodList = new ArrayList<>();
         verificationMethodList.add(AliceMethod);
         verificationMethodList.add(AliceMethod1);
@@ -100,6 +124,8 @@ public class DIDDocResolverMock implements DIDDocResolver {
         verificationMethodList.add(AliceMethod3);
         verificationMethodList.add(AliceMethod4);
         verificationMethodList.add(AliceMethod6);
+        verificationMethodList.add(BobMethod1);
+        verificationMethodList.add(BobMethod2);
 
         List<DIDCommService> didCommServiceList = new ArrayList<>();
 
@@ -113,6 +139,7 @@ public class DIDDocResolverMock implements DIDDocResolver {
         authentications.add("did:example:alice#key-1");
         authentications.add("did:example:alice#key-3");
         authentications.add("did:example:alice#key-6");
+        authentications.add("did:example:alice#key-6");
 
         didDoc1 = new DIDDoc(
                 "did:example:alice",
@@ -122,7 +149,26 @@ public class DIDDocResolverMock implements DIDDocResolver {
                 didCommServiceList
         );
 
+        verificationMethodList = new ArrayList<>();
+        verificationMethodList.add(BobMethod1);
+        verificationMethodList.add(BobMethod2);
+
+        keyAgreementList = new ArrayList<>();
+        keyAgreementList.add("did:example:bob#key-2");
+
+        authentications = new ArrayList<>();
+        authentications.add("did:example:bob#key-1");
+
+        DIDDoc didDoc2 = new DIDDoc(
+                "did:example:bob",
+                keyAgreementList,
+                authentications,
+                verificationMethodList,
+                didCommServiceList
+        );
+
         didDocList.add(didDoc1);
+        didDocList.add(didDoc2);
 
         didDocResolverInMemory = new DIDDocResolverInMemory(didDocList);
     }
