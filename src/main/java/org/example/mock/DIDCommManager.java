@@ -24,20 +24,23 @@ public class DIDCommManager {
         DIDDocResolverMock didDocResolverMock = new DIDDocResolverMock();
         didDocResolverMock.SetDIDDoc();
 
-        if(this.did == "did:example:bob")
+        if(this.did.equals("did:example:bob"))
         {
+            System.out.println("did1");
             BobSecretResolverMock secretResolverInMemoryMock = new BobSecretResolverMock();
             secretResolverInMemoryMock.SetSecret();
             this.didComm = new DIDComm(didDocResolverMock, secretResolverInMemoryMock);
         }
-        if(this.did == "did:example:alice")
+        else if(this.did.equals("did:example:alice"))
         {
+            System.out.println("did2");
             AliceSecretResolverMock secretResolverInMemoryMock = new AliceSecretResolverMock();
             secretResolverInMemoryMock.SetSecret();
             this.didComm = new DIDComm(didDocResolverMock, secretResolverInMemoryMock);
         }
         else
         {
+            System.out.println("did3");
             SecretResolverInMemoryMock secretResolverInMemoryMock = new SecretResolverInMemoryMock();
             secretResolverInMemoryMock.SetSecret();
             this.didComm = new DIDComm(didDocResolverMock, secretResolverInMemoryMock);
@@ -85,6 +88,37 @@ public class DIDCommManager {
 
         System.out.println("UnPack Message : " + unpackMessage);
 
+        String unpackMessage2 = unpackResult.getMessage().getBody().toString();
+
+        System.out.println("UnPack Message : " + unpackMessage2);
+
         return unpackMessage;
+    }
+
+    public void TestDIDComm(String message) throws Exception {
+        System.out.println("========== Test DIDComm ==========");
+
+        System.out.println("input message : " + message);
+
+        String testEncryMsg = messageEncryption(this.did, message);
+        System.out.println("testEncryMsg : " + testEncryMsg);
+
+        String testDecryMsg = messageDecryption(testEncryMsg);
+        System.out.println("testDecryMsg : " + testDecryMsg);
+    }
+
+    public void TCPDIDCommTest(String serverDid, String clientDid) throws Exception {
+        System.out.println("========== TCP DIDComm Test ==========");
+
+        DIDCommManager serverDIDComm = new DIDCommManager(serverDid);
+        DIDCommManager clientDIDComm = new DIDCommManager(clientDid);
+
+        String testMsg = "Hello";
+
+        String encryTestMsg = clientDIDComm.messageEncryption(serverDid, testMsg);
+        System.out.println("encryTestMsg : " + encryTestMsg);
+
+        String decryTestMsg = serverDIDComm.messageDecryption(encryTestMsg);
+        System.out.println("decryTestMsg : " + decryTestMsg);
     }
 }

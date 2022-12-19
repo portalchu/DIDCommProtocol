@@ -1,22 +1,30 @@
 package org.example;
 
+import org.example.mock.DIDCommManager;
+
 import java.util.Scanner;
 
 public class Main {
+
+    static String serverDid = "did:example:alice";
+    static String clientDid = "did:example:bob";
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
         Scanner sc = new Scanner(System.in);
         int num;
 
-        String serverDid = "did:example:alice";
-        String clientDid = "did:example:bob";
-
         try {
             while (true)
             {
                 System.out.println("1 : 서버 실행");
                 System.out.println("2 : 클라이언트 실행");
+                System.out.println("3 : DIDComm 테스트");
+                System.out.println("4 : DIDComm 테스트 2");
+                System.out.println("5 : DID Server 실행");
+                System.out.println("6 : DID Client 실행");
+                System.out.println("8 : server DID 확인");
+                System.out.println("9 : client DID 확인");
                 System.out.println("0 : 종료");
 
                 System.out.println("번호 입력 : ");
@@ -28,6 +36,31 @@ public class Main {
                         break;
                     case 2:
                         Client.client();
+                        break;
+                    case 3:
+                        System.out.println("input test did : ");
+                        String testDid = sc.next();
+                        System.out.println("test did : " + testDid);
+                        DIDCommManager testDIDComm = new DIDCommManager(testDid);
+                        System.out.println("input message : ");
+                        String testMessage = sc.next();
+                        testDIDComm.TestDIDComm(testMessage);
+                        break;
+                    case 4:
+                        DIDCommManager testDIDComm2 = new DIDCommManager("test");
+                        testDIDComm2.TCPDIDCommTest(serverDid, clientDid);
+                        break;
+                    case 5:
+                        Server.DIDCommServer(serverDid);
+                        break;
+                    case 6:
+                        Client.DIDCommClient(clientDid);
+                        break;
+                    case 8:
+                        System.out.println("server DID : " + serverDid);
+                        break;
+                    case 9:
+                        System.out.println("client DID : " + clientDid);
                         break;
                     case 0:
                         return;

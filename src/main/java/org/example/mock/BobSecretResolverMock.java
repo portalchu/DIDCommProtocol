@@ -42,10 +42,24 @@ public class BobSecretResolverMock implements SecretResolver {
             )
     );
 
+    public Secret secret3 = new Secret(
+            "did:example:bob#key-3",
+            VerificationMethodType.JSON_WEB_KEY_2020,
+            new VerificationMaterial(
+                    VerificationMaterialFormat.JWK,
+                    "{\"kty\":\"EC\"," +
+                            "\"d\":\"PgwHnlXxt8pwR6OCTUwwWx-P51BiLkFZyqHzquKddXQ\"," +
+                            "\"crv\":\"P-256\"," +
+                            "\"x\":\"FQVaTOksf-XsCUrt4J1L2UGvtWaDwpboVlqbKBY2AIo\"," +
+                            "\"y\":\"6XFB9PYo7dyC5ViJSO9uXNYkxTJWn0d_mqJ__ZYhcNY\"}"
+            )
+    );
+
     public void SetSecret() {
         secrets = new ArrayList<>();
         secrets.add(secret1);
         secrets.add(secret2);
+        secrets.add(secret3);
 
         secretResolverInMemory = new SecretResolverInMemory(secrets);
     }

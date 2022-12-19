@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class DIDDocResolverMock implements DIDDocResolver {
 
-    private DIDDoc didDoc1;
     private List<DIDDoc> didDocList = new ArrayList<>();
 
     public DIDDocResolverInMemory didDocResolverInMemory;
@@ -114,7 +113,20 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"crv\":\"X25519\"," +
                                 "\"x\":\"gL9h8PIoyDbWYqPJuV9oLlq_Y4jOHVFO2EspbgO3fyE\"}"
                 ),
-                "did:example:alice#key-2"
+                "did:example:bob#key-2"
+        );
+
+        VerificationMethod BobMethod3 = new VerificationMethod(
+                "did:example:bob#key-3",
+                VerificationMethodType.JSON_WEB_KEY_2020,
+                new VerificationMaterial(
+                        VerificationMaterialFormat.JWK,
+                        "{\"kty\":\"EC\"," +
+                                "\"crv\":\"P-256\"," +
+                                "\"x\":\"FQVaTOksf-XsCUrt4J1L2UGvtWaDwpboVlqbKBY2AIo\"," +
+                                "\"y\":\"6XFB9PYo7dyC5ViJSO9uXNYkxTJWn0d_mqJ__ZYhcNY\"}"
+                ),
+                "did:example:bob#key-3"
         );
 
         List<VerificationMethod> verificationMethodList = new ArrayList<>();
@@ -139,7 +151,7 @@ public class DIDDocResolverMock implements DIDDocResolver {
         authentications.add("did:example:alice#key-6");
         authentications.add("did:example:alice#key-6");
 
-        didDoc1 = new DIDDoc(
+        DIDDoc didDoc1 = new DIDDoc(
                 "did:example:alice",
                 keyAgreementList,
                 authentications,
@@ -147,21 +159,24 @@ public class DIDDocResolverMock implements DIDDocResolver {
                 didCommServiceList
         );
 
-        verificationMethodList = new ArrayList<>();
-        verificationMethodList.add(BobMethod1);
-        verificationMethodList.add(BobMethod2);
+        List<VerificationMethod> verificationMethodList2 = new ArrayList<>();
+        verificationMethodList2.add(BobMethod1);
+        verificationMethodList2.add(BobMethod2);
+        verificationMethodList2.add(BobMethod3);
 
-        keyAgreementList = new ArrayList<>();
-        keyAgreementList.add("did:example:bob#key-2");
+        List<String> keyAgreementList2 = new ArrayList<>();
+        keyAgreementList2.add("did:example:bob#key-2");
+        keyAgreementList2.add("did:example:bob#key-3");
 
-        authentications = new ArrayList<>();
-        authentications.add("did:example:bob#key-1");
+        List<String> authentications2 = new ArrayList<>();
+        authentications2.add("did:example:bob#key-1");
+        authentications2.add("did:example:bob#key-3");
 
         DIDDoc didDoc2 = new DIDDoc(
                 "did:example:bob",
-                keyAgreementList,
-                authentications,
-                verificationMethodList,
+                keyAgreementList2,
+                authentications2,
+                verificationMethodList2,
                 didCommServiceList
         );
 
