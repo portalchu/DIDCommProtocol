@@ -40,6 +40,7 @@ public class Server {
             InetAddress inetAddress = InetAddress.getLocalHost();
             String localhost = inetAddress.getHostAddress();
 
+            //localhost = "";
             serverSocket.bind(new InetSocketAddress(localhost, PORT));
 
             System.out.println("[server] binding " + localhost);
