@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.JNIModule.JNI;
 import org.example.mock.DIDCommManager;
 
 import java.util.Scanner;
@@ -25,6 +26,7 @@ public class Main {
                 System.out.println("6 : DID Client 실행");
                 System.out.println("8 : server DID 확인");
                 System.out.println("9 : client DID 확인");
+                System.out.println("10 : JNITest");
                 System.out.println("0 : 종료");
 
                 System.out.println("번호 입력 : ");
@@ -61,6 +63,11 @@ public class Main {
                         break;
                     case 9:
                         System.out.println("client DID : " + clientDid);
+                        break;
+                    case 10:
+                        System.out.println("JNI Test");
+                        JNI jni = new JNI();
+                        System.out.println(jni.getNumber());
                         break;
                     case 0:
                         return;

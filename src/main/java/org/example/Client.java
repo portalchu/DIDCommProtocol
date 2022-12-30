@@ -33,7 +33,7 @@ public class Client {
         // new InetSocketAddress(InetAddress.getLocalHost() 6077
 
         try {
-            socket.connect(new InetSocketAddress("220.68.5.138",6077), 6077);
+            socket.connect(new InetSocketAddress("220.68.5.140",6077), 6077);
             System.out.println("[client] connected with server");
 
             while (true) {
@@ -103,7 +103,7 @@ public class Client {
         // new InetSocketAddress(InetAddress.getLocalHost() 6077
 
         try {
-            socket.connect(new InetSocketAddress("192.168.10.108",6077), 6077);
+            socket.connect(new InetSocketAddress("220.68.5.140",6077), 6077);
             System.out.println("[client] connected with server");
 
             while (true) {
