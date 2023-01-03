@@ -55,7 +55,7 @@ public class Gpio {
         //pi4j.shutdown();
     }
 
-    public void gpioButton() throws InterruptedException {
+    public static void gpioButton() throws InterruptedException {
 
         var pi4j = Pi4J.newAutoContext();
 
@@ -71,7 +71,9 @@ public class Gpio {
         DigitalInputConfig input = DigitalInput.newConfigBuilder(pi4j).id("BCM26")
                 .name("Button")
                 .address(24)
-                .debounce(DEBOUNC).pull(PullResistance.PULL_DOWN)
+                .debounce(DEBOUNC)
+                .pull(PullResistance.PULL_DOWN)
+                .provider("pigpio-digital-input")
                 .build();
 
         final var button = pi4j.create(input);
@@ -80,7 +82,7 @@ public class Gpio {
             if (e.state() == DigitalState.LOW) {
                 console.println("Button Down!!");
             }
-            else
+            if (e.state() == DigitalState.HIGH)
             {
                 console.println("Button No Down!!");
             }
