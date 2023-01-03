@@ -3,6 +3,8 @@ package org.example;
 import com.pi4j.Pi4J;
 import com.pi4j.io.gpio.digital.*;
 import com.pi4j.platform.Platforms;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +58,10 @@ public class Gpio {
 
         var pi4j = Pi4J.newAutoContext();
 
-        long DEBOUNC = 10_000;
+
+        Logger logger = LoggerFactory.getLogger(Gpio.class);
+
+        long DEBOUNC = 3000L;
 
         DigitalInputConfig input = DigitalInput.newConfigBuilder(pi4j).id("BCM26")
                 .name("Button")
@@ -66,13 +71,17 @@ public class Gpio {
 
         final var button = pi4j.create(input);
 
-        button.addListener(digitalStateChangeEvent -> {
-            DigitalState state = button.state();
-
-            System.out.println("Button is " + state + ".");
-
+        button.addListener(e -> {
+            if (e.state() == DigitalState.LOW) {
+                System.out.println("Button Down!!");
+            }
+            else
+            {
+                System.out.println("Button No Down!!");
+            }
         });
 
+        Thread.sleep(500);
     }
 
 }
