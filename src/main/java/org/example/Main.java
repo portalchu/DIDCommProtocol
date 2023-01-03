@@ -67,7 +67,7 @@ public class Main {
                     case 10:
                         System.out.println("JNI Test");
                         JNI jni = new JNI();
-                        System.out.println(jni.getNumber());
+                        System.out.println(jni.getSensorResult());
                         break;
                     case 0:
                         return;
