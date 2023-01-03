@@ -3,6 +3,7 @@ package org.example;
 import com.pi4j.Pi4J;
 import com.pi4j.io.gpio.digital.*;
 import com.pi4j.platform.Platforms;
+import com.pi4j.util.Console;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,8 +59,12 @@ public class Gpio {
 
         var pi4j = Pi4J.newAutoContext();
 
-
-        Logger logger = LoggerFactory.getLogger(Gpio.class);
+        Console console = new Console();
+        Platforms platforms = pi4j.platforms();
+        console.box("Pi4J PLATFORMS");
+        console.println();
+        platforms.describe().print(System.out);
+        console.println();
 
         long DEBOUNC = 3000L;
 
@@ -73,15 +78,18 @@ public class Gpio {
 
         button.addListener(e -> {
             if (e.state() == DigitalState.LOW) {
-                System.out.println("Button Down!!");
+                console.println("Button Down!!");
             }
             else
             {
-                System.out.println("Button No Down!!");
+                console.println("Button No Down!!");
             }
         });
 
-        Thread.sleep(500);
+        while (true)
+        {
+            Thread.sleep(500);
+        }
     }
 
 }
