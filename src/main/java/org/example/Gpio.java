@@ -60,7 +60,7 @@ public class Gpio {
 
         DigitalInputConfig input = DigitalInput.newConfigBuilder(pi4j).id("BCM26")
                 .name("Button")
-                .address(26)
+                .address(24)
                 .debounce(DEBOUNC).pull(PullResistance.PULL_DOWN)
                 .build();
 
