@@ -13,6 +13,7 @@ public class Main {
         System.out.println("Hello world!");
 
         Scanner sc = new Scanner(System.in);
+        Gpio gpio = new Gpio();
         int num;
 
         try {
@@ -28,6 +29,7 @@ public class Main {
                 System.out.println("9 : client DID 확인");
                 System.out.println("10 : JNITest");
                 System.out.println("11 : PI4J Test");
+                System.out.println("12 : Button Test");
                 System.out.println("0 : 종료");
 
                 System.out.println("번호 입력 : ");
@@ -72,8 +74,11 @@ public class Main {
                         break;
                     case 11:
                         System.out.println("PI4J Test");
-                        Gpio gpio = new Gpio();
                         gpio.gpio();
+                        break;
+                    case 12:
+                        System.out.println("Button Test");
+                        gpio.gpioButton();
                         break;
                     case 0:
                         return;

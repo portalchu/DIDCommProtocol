@@ -1,9 +1,7 @@
 package org.example;
 
 import com.pi4j.Pi4J;
-import com.pi4j.io.gpio.digital.DigitalInput;
-import com.pi4j.io.gpio.digital.DigitalOutput;
-import com.pi4j.io.gpio.digital.DigitalState;
+import com.pi4j.io.gpio.digital.*;
 import com.pi4j.platform.Platforms;
 
 import java.util.Properties;
@@ -52,6 +50,29 @@ public class Gpio {
         }
 
         //pi4j.shutdown();
+    }
+
+    public void gpioButton() throws InterruptedException {
+
+        var pi4j = Pi4J.newAutoContext();
+
+        long DEBOUNC = 10_000;
+
+        DigitalInputConfig input = DigitalInput.newConfigBuilder(pi4j).id("BCM26")
+                .name("Button")
+                .address(26)
+                .debounce(DEBOUNC).pull(PullResistance.PULL_DOWN)
+                .build();
+
+        final var button = pi4j.create(input);
+
+        button.addListener(digitalStateChangeEvent -> {
+            DigitalState state = button.state();
+
+            System.out.println("Button is " + state + ".");
+
+        });
+
     }
 
 }
