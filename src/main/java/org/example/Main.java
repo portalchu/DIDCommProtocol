@@ -27,6 +27,7 @@ public class Main {
                 System.out.println("8 : server DID 확인");
                 System.out.println("9 : client DID 확인");
                 System.out.println("10 : JNITest");
+                System.out.println("11 : PI4J Test");
                 System.out.println("0 : 종료");
 
                 System.out.println("번호 입력 : ");
@@ -68,6 +69,11 @@ public class Main {
                         System.out.println("JNI Test");
                         JNI jni = new JNI();
                         System.out.println(jni.getSensorResult());
+                        break;
+                    case 11:
+                        System.out.println("PI4J Test");
+                        Gpio gpio = new Gpio();
+                        gpio.gpio();
                         break;
                     case 0:
                         return;

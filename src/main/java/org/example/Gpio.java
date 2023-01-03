@@ -47,7 +47,11 @@ public class Gpio {
             }
         });
 
-        pi4j.shutdown();
+        for(;;) {
+          Thread.sleep(1000);
+        }
+
+        //pi4j.shutdown();
     }
 
 }
