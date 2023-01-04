@@ -168,7 +168,7 @@ public class Server {
                 System.out.println("[server] recived : " + buffer);
 
                 String decryData = didCommManager.messageDecryption(buffer);
-                System.out.println("decryData : " + decryData);
+                System.out.println("decrypt message : " + decryData);
 
                 JSONObject jsonObject = new JSONObject(decryData);
                 JSONObject bodyObject = jsonObject.getJSONObject("body");

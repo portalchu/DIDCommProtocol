@@ -180,6 +180,8 @@ public class Client {
             socket.connect(new InetSocketAddress("220.68.5.140",6077), 6077);
             System.out.println("[client] connected with server");
 
+            Gpio.gpioButton();
+
             while (true) {
 
                 is = socket.getInputStream();
@@ -190,7 +192,6 @@ public class Client {
                 osw = new OutputStreamWriter(os, "UTF-8");
                 pw = new PrintWriter(osw, true);
 
-                Gpio.gpioButton();
                 // 읽는거
                 /*
                 System.out.print(">>");
@@ -207,7 +208,7 @@ public class Client {
 
                 // DIDComm 적용 위치?
                 String encryData = didCommManager.messageEncryption(Main.serverDid, data);
-                System.out.println("encryData : " + encryData);
+                System.out.println("encrypted message : " + encryData);
 
                 pw.println(encryData);
 
