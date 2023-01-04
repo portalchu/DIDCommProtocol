@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class Gpio {
 
     public static long distance, start, end;
+    public static boolean touched = false;
 
     public void gpio() throws InterruptedException {
 
@@ -48,14 +49,58 @@ public class Gpio {
             }
         });
 
+        /*
         for(;;) {
           Thread.sleep(1000);
         }
+
+         */
 
         //pi4j.shutdown();
     }
 
     public static void gpioButton() throws InterruptedException {
+
+        var pi4j = Pi4J.newAutoContext();
+
+        Console console = new Console();
+        Platforms platforms = pi4j.platforms();
+        console.box("Pi4J PLATFORMS");
+        console.println();
+        platforms.describe().print(System.out);
+        console.println();
+
+        long DEBOUNC = 3000L;
+
+        DigitalInputConfig input = DigitalInput.newConfigBuilder(pi4j).id("BCM26")
+                .name("Button")
+                .address(24)
+                .debounce(DEBOUNC)
+                .pull(PullResistance.PULL_DOWN)
+                .provider("pigpio-digital-input")
+                .build();
+
+        final var button = pi4j.create(input);
+
+        button.addListener(e -> {
+            if (e.state() == DigitalState.HIGH) {
+                console.println("Button Down!!");
+                touched = true;
+            }
+            if (e.state() == DigitalState.LOW)
+            {
+                console.println("Button No Down!!");
+                touched = false;
+            }
+        });
+
+        while (true)
+        {
+            Thread.sleep(500);
+        }
+    }
+
+    public static void gpioSonic() throws InterruptedException {
 
         var pi4j = Pi4J.newAutoContext();
 

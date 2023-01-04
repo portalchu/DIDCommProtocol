@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.mock.DIDCommManager;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -77,6 +78,7 @@ public class Server {
                 }
 
                 System.out.println("[server] recived : " + buffer);
+
                 pw.println(buffer);
 
             }
@@ -167,6 +169,10 @@ public class Server {
 
                 String decryData = didCommManager.messageDecryption(buffer);
                 System.out.println("decryData : " + decryData);
+
+                JSONObject jsonObject = new JSONObject(decryData);
+                JSONObject bodyObject = jsonObject.getJSONObject("body");
+                System.out.println("bodyObject : " + bodyObject);
 
                 pw.println(buffer);
 
