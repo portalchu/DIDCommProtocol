@@ -55,12 +55,14 @@ public class DIDCommManager {
         List<String> to = new ArrayList<>();
         to.add(resiverDid);
 
+        long time = System.currentTimeMillis();
+
         Message didcommMessage = Message.Companion.builder(
                         "1234", body, "http://example.com/protocols/lets_do_lunch/1.0/proposal")
                 .from(this.did)
                 .to(to)
-                .createdTime(1546521l)
-                .expiresTime(1543215l)
+                .createdTime(time)
+                .expiresTime(1706943600L)
                 .build();
 
         System.out.println("didcommMessage : " + didcommMessage.toString());
