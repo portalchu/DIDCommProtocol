@@ -94,10 +94,13 @@ public class Gpio {
             }
         });
 
+        /*
         while (true)
         {
             Thread.sleep(500);
         }
+        
+         */
     }
 
     public static void gpioSonic() throws InterruptedException {
