@@ -190,11 +190,17 @@ public class Client {
                 osw = new OutputStreamWriter(os, "UTF-8");
                 pw = new PrintWriter(osw, true);
 
+                Gpio.gpioButton();
                 // 읽는거
+                /*
                 System.out.print(">>");
                 String data = sc.nextLine();
 
-                Gpio.gpioButton();
+                 */
+                String data;
+
+                if (Gpio.touched) data = "Touch!";
+                else data = "No Touch!";
 
                 if ("exit".equals(data))
                     break;
