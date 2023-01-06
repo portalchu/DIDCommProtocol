@@ -63,10 +63,10 @@ public class DIDCommManager {
 
         long time = System.currentTimeMillis();
         double randomNumber = Math.random() * 1000000;
-        String randomNumberString = Double.toString(randomNumber);
+        int randomNumberInt = (int)randomNumber;
 
         Message didcommMessage = Message.Companion.builder(
-                        randomNumberString, body, "http://example.com/protocols/lets_do_lunch/1.0/proposal")
+                        Integer.toString(randomNumberInt), body, "http://example.com/protocols/lets_do_lunch/1.0/proposal")
                 .from(this.did)
                 .to(to)
                 .createdTime(time)
