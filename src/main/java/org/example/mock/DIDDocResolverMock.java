@@ -17,7 +17,7 @@ public class DIDDocResolverMock implements DIDDocResolver {
 
     public void SetDIDDoc() {
         VerificationMethod AliceMethod = new VerificationMethod(
-                "did:example:alice#key-1",
+                "did:iot:gateway#key-1",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -25,11 +25,11 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"crv\":\"Ed25519\"," +
                                 "\"x\":\"1eESIYXnbLGwyNPeH0Nwxasd7exQJR2UD1OBGqoZDcg\"}"
                 ),
-                "did:example:alice#key-1"
+                "did:iot:gateway#key-1"
         );
 
         VerificationMethod AliceMethod1 = new VerificationMethod(
-                "did:example:alice#key-2",
+                "did:iot:gateway#key-2",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -37,11 +37,11 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"crv\":\"X25519\"," +
                                 "\"x\":\"F0g1QxzOMqTo00hg6PIf4zHY0_6FMe_OBujYsenYz3Q\"}"
                 ),
-                "did:example:alice#key-2"
+                "did:iot:gateway#key-2"
         );
 
         VerificationMethod AliceMethod2 = new VerificationMethod(
-                "did:example:alice#key-3",
+                "did:iot:gateway#key-3",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -50,11 +50,11 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"x\":\"ivYUvybjaokTJantAbzGg96L4qkCjngDbliNp3yPkzM\"," +
                                 "\"y\":\"ZtMsrzFOx-kdqQd_jJc2TnN_ASFJc2m0C7R2VhkfSJs\"}"
                 ),
-                "did:example:alice#key-3"
+                "did:iot:gateway#key-3"
         );
 
         VerificationMethod AliceMethod3 = new VerificationMethod(
-                "did:example:alice#key-4",
+                "did:iot:gateway#key-4",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -63,11 +63,11 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"x\":\"wKqfYznOMAtdHuMfzn3kxSXj-em2PHnzBRwalbJZRVfnrvO5zMgpwL0cvBw89QML\"," +
                                 "\"y\":\"QLmGVThWGUF3yOo1WdBuuepKygs4xOnpZErxJrp33UjST8uaF75l7RR5YdDcuxPs\"}"
                 ),
-                "did:example:alice#key-4"
+                "did:iot:gateway#key-4"
         );
 
         VerificationMethod AliceMethod4 = new VerificationMethod(
-                "did:example:alice#key-5",
+                "did:iot:gateway#key-5",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -76,11 +76,11 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"x\":\"AdhTtFmjcApJOXNNH9DASL1V6_q3Vs_PUVX-5HxVMywPtX7dAO02_kUBej4Wf7hbwNXktnAkn-YXrOohGQ9IBMPS\"," +
                                 "\"y\":\"AaG7be12d_uptxBUL1p9cey0TRTR5mxVMfe8OxZUjrRUgFmguBzEKUgPIIG9WQofvbjKxPcLVjHrPwGBH8QsHmcW\"}"
                 ),
-                "did:example:alice#key-5"
+                "did:iot:gateway#key-5"
         );
 
         VerificationMethod AliceMethod6 = new VerificationMethod(
-                "did:example:alice#key-6",
+                "did:iot:gateway#key-6",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -89,11 +89,11 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"x\":\"YtMKHzQ7XfvEXGE_XvDNPYxhdvOGZes0UlNqkzXUNSM\"," +
                                 "\"y\":\"M37EnuxZv85ucjHINqKadm9Y84t97hn8P5KRyxZIlmE\"}"
                 ),
-                "did:example:alice#key-6"
+                "did:iot:gateway#key-6"
         );
 
         VerificationMethod BobMethod1 = new VerificationMethod(
-                "did:example:bob#key-1",
+                "did:iot:iot_device_touch_1#key-1",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -101,11 +101,11 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"crv\":\"Ed25519\"," +
                                 "\"x\":\"n7R4go0dfPvU2MVD56nz-osbSfYxi0sb7di-oKcsX7k\"}"
                 ),
-                "did:example:bob#key-1"
+                "did:iot:iot_device_touch_1#key-1"
         );
 
         VerificationMethod BobMethod2 = new VerificationMethod(
-                "did:example:bob#key-2",
+                "did:iot:iot_device_touch_1#key-2",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -113,11 +113,11 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"crv\":\"X25519\"," +
                                 "\"x\":\"gL9h8PIoyDbWYqPJuV9oLlq_Y4jOHVFO2EspbgO3fyE\"}"
                 ),
-                "did:example:bob#key-2"
+                "did:iot:iot_device_touch_1#key-2"
         );
 
         VerificationMethod BobMethod3 = new VerificationMethod(
-                "did:example:bob#key-3",
+                "did:iot:iot_device_touch_1#key-3",
                 VerificationMethodType.JSON_WEB_KEY_2020,
                 new VerificationMaterial(
                         VerificationMaterialFormat.JWK,
@@ -126,7 +126,7 @@ public class DIDDocResolverMock implements DIDDocResolver {
                                 "\"x\":\"FQVaTOksf-XsCUrt4J1L2UGvtWaDwpboVlqbKBY2AIo\"," +
                                 "\"y\":\"6XFB9PYo7dyC5ViJSO9uXNYkxTJWn0d_mqJ__ZYhcNY\"}"
                 ),
-                "did:example:bob#key-3"
+                "did:iot:iot_device_touch_1#key-3"
         );
 
         List<VerificationMethod> verificationMethodList = new ArrayList<>();
@@ -140,19 +140,19 @@ public class DIDDocResolverMock implements DIDDocResolver {
         List<DIDCommService> didCommServiceList = new ArrayList<>();
 
         List<String> keyAgreementList = new ArrayList<>();
-        keyAgreementList.add("did:example:alice#key-2");
-        keyAgreementList.add("did:example:alice#key-3");
-        keyAgreementList.add("did:example:alice#key-4");
-        keyAgreementList.add("did:example:alice#key-5");
+        keyAgreementList.add("did:iot:gateway#key-2");
+        keyAgreementList.add("did:iot:gateway#key-3");
+        keyAgreementList.add("did:iot:gateway#key-4");
+        keyAgreementList.add("did:iot:gateway#key-5");
 
         List<String> authentications = new ArrayList<>();
-        authentications.add("did:example:alice#key-1");
-        authentications.add("did:example:alice#key-3");
-        authentications.add("did:example:alice#key-6");
-        authentications.add("did:example:alice#key-6");
+        authentications.add("did:iot:gateway#key-1");
+        authentications.add("did:iot:gateway#key-3");
+        authentications.add("did:iot:gateway#key-6");
+        authentications.add("did:iot:gateway#key-6");
 
         DIDDoc didDoc1 = new DIDDoc(
-                "did:example:alice",
+                "did:iot:gateway",
                 keyAgreementList,
                 authentications,
                 verificationMethodList,
@@ -165,15 +165,15 @@ public class DIDDocResolverMock implements DIDDocResolver {
         verificationMethodList2.add(BobMethod3);
 
         List<String> keyAgreementList2 = new ArrayList<>();
-        keyAgreementList2.add("did:example:bob#key-2");
-        keyAgreementList2.add("did:example:bob#key-3");
+        keyAgreementList2.add("did:iot:iot_device_touch_1#key-2");
+        keyAgreementList2.add("did:iot:iot_device_touch_1#key-3");
 
         List<String> authentications2 = new ArrayList<>();
-        authentications2.add("did:example:bob#key-1");
-        authentications2.add("did:example:bob#key-3");
+        authentications2.add("did:iot:iot_device_touch_1#key-1");
+        authentications2.add("did:iot:iot_device_touch_1#key-3");
 
         DIDDoc didDoc2 = new DIDDoc(
-                "did:example:bob",
+                "did:iot:iot_device_touch_1",
                 keyAgreementList2,
                 authentications2,
                 verificationMethodList2,

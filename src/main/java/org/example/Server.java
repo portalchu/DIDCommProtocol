@@ -173,7 +173,7 @@ public class Server {
                 JSONObject jsonObject = new JSONObject(decryData);
                 JSONObject bodyObject = jsonObject.getJSONObject("body");
                 System.out.println("bodyObject : " + bodyObject);
-                System.out.println("message : " + bodyObject.get("message").toString());
+                //System.out.println("message : " + bodyObject.get("message").toString());
 
                 pw.println(buffer);
 

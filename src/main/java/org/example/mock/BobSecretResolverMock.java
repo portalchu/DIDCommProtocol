@@ -19,7 +19,7 @@ public class BobSecretResolverMock implements SecretResolver {
     public SecretResolverInMemory secretResolverInMemory;
 
     public Secret secret1 = new Secret(
-            "did:example:bob#key-1",
+            "did:iot:iot_device_touch_1#key-1",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,
@@ -31,7 +31,7 @@ public class BobSecretResolverMock implements SecretResolver {
     );
 
     public Secret secret2 = new Secret(
-            "did:example:bob#key-2",
+            "did:iot:iot_device_touch_1#key-2",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,
@@ -43,7 +43,7 @@ public class BobSecretResolverMock implements SecretResolver {
     );
 
     public Secret secret3 = new Secret(
-            "did:example:bob#key-3",
+            "did:iot:iot_device_touch_1#key-3",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,

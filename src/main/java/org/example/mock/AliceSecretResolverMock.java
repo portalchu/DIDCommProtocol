@@ -19,7 +19,7 @@ public class AliceSecretResolverMock implements SecretResolver {
     public SecretResolverInMemory secretResolverInMemory;
 
     public Secret secret1 = new Secret(
-            "did:example:alice#key-1",
+            "did:iot:gateway#key-1",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,
@@ -31,7 +31,7 @@ public class AliceSecretResolverMock implements SecretResolver {
     );
 
     public Secret secret2 = new Secret(
-            "did:example:alice#key-2",
+            "did:iot:gateway#key-2",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,
@@ -43,7 +43,7 @@ public class AliceSecretResolverMock implements SecretResolver {
     );
 
     public Secret secret3 = new Secret(
-            "did:example:alice#key-3",
+            "did:iot:gateway#key-3",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,
@@ -56,7 +56,7 @@ public class AliceSecretResolverMock implements SecretResolver {
     );
 
     public Secret secret4 = new Secret(
-            "did:example:alice#key-4",
+            "did:iot:gateway#key-4",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,
@@ -69,7 +69,7 @@ public class AliceSecretResolverMock implements SecretResolver {
     );
 
     public Secret secret5 = new Secret(
-            "did:example:alice#key-5",
+            "did:iot:gateway#key-5",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,
@@ -82,7 +82,7 @@ public class AliceSecretResolverMock implements SecretResolver {
     );
 
     public Secret secret6 = new Secret(
-            "did:example:alice#key-6",
+            "did:iot:gateway#key-6",
             VerificationMethodType.JSON_WEB_KEY_2020,
             new VerificationMaterial(
                     VerificationMaterialFormat.JWK,

@@ -6,6 +6,7 @@ import org.didcommx.didcomm.model.PackEncryptedParams;
 import org.didcommx.didcomm.model.PackEncryptedResult;
 import org.didcommx.didcomm.model.UnpackParams;
 import org.didcommx.didcomm.model.UnpackResult;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,14 +25,14 @@ public class DIDCommManager {
         DIDDocResolverMock didDocResolverMock = new DIDDocResolverMock();
         didDocResolverMock.SetDIDDoc();
 
-        if(this.did.equals("did:example:bob"))
+        if(this.did.equals("did:iot:iot_device_touch_1"))
         {
             System.out.println("did1");
             BobSecretResolverMock secretResolverInMemoryMock = new BobSecretResolverMock();
             secretResolverInMemoryMock.SetSecret();
             this.didComm = new DIDComm(didDocResolverMock, secretResolverInMemoryMock);
         }
-        else if(this.did.equals("did:example:alice"))
+        else if(this.did.equals("did:iot:gateway"))
         {
             System.out.println("did2");
             AliceSecretResolverMock secretResolverInMemoryMock = new AliceSecretResolverMock();
@@ -49,16 +50,23 @@ public class DIDCommManager {
 
     public String messageEncryption (String resiverDid, String message) throws Exception {
 
+        JSONObject messageJsonObj = new JSONObject();
+        messageJsonObj.put("id", this.did);
+        messageJsonObj.put("controller", "did:deu:alice1234");
+        messageJsonObj.put("body", message);
+
         Map<String, String> body = new HashMap<>();
-        body.put("message", message);
+        body.put("message", messageJsonObj.toString());
 
         List<String> to = new ArrayList<>();
         to.add(resiverDid);
 
         long time = System.currentTimeMillis();
+        double randomNumber = Math.random() * 1000000;
+        String randomNumberString = Double.toString(randomNumber);
 
         Message didcommMessage = Message.Companion.builder(
-                        "1234", body, "http://example.com/protocols/lets_do_lunch/1.0/proposal")
+                        randomNumberString, body, "http://example.com/protocols/lets_do_lunch/1.0/proposal")
                 .from(this.did)
                 .to(to)
                 .createdTime(time)

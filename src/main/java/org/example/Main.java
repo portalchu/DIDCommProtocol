@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    static String serverDid = "did:example:alice";
-    static String clientDid = "did:example:bob";
+    static String serverDid = "did:iot:gateway";
+    static String clientDid = "did:iot:iot_device_touch_1";
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
