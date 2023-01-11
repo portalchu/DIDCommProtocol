@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Gpio {
 
-    public static long distance, start, end;
+    public static long distance = 0, start = 0, end = 0;
     public static boolean touched = false;
 
     public void gpio() throws InterruptedException {
@@ -116,7 +116,17 @@ public class Gpio {
 
         long DEBOUNC = 3000L;
 
-        DigitalInputConfig input = DigitalInput.newConfigBuilder(pi4j).id("BCM26")
+        DigitalOutputConfig output = DigitalOutput.newConfigBuilder(pi4j).id("SonicO")
+                .name("SonicOut")
+                .address(23)
+                .shutdown(DigitalState.LOW)
+                .initial(DigitalState.LOW)
+                .provider("pigpio-digital-output")
+                .build();
+
+        final var sonicOutput = pi4j.create(output);
+
+        DigitalInputConfig input = DigitalInput.newConfigBuilder(pi4j).id("SonicI")
                 .name("Button")
                 .address(24)
                 .debounce(DEBOUNC)
@@ -124,22 +134,42 @@ public class Gpio {
                 .provider("pigpio-digital-input")
                 .build();
 
-        final var button = pi4j.create(input);
+        final var sonicInput = pi4j.create(input);
 
-        button.addListener(e -> {
-            if (e.state() == DigitalState.LOW) {
-                console.println("Button Down!!");
-            }
-            if (e.state() == DigitalState.HIGH)
-            {
-                console.println("Button No Down!!");
-            }
-        });
+
+        sonicInput.addListener(e -> {
+                    if (e.state() == DigitalState.LOW) {
+                        start = System.nanoTime();
+                        console.println("time Check1 : start is " + start);
+                    }
+                    if (e.state() == DigitalState.HIGH) {
+                        end = System.nanoTime();
+                        console.println("time Check2 : end is " + end);
+                        distance = (end - start) / 58;
+                        System.out.println("Distance " + distance + " cm");
+                    }
+                });
+
+        sonicOutput.low();
+        Thread.sleep(5000);
+        sonicOutput.high();
+        Thread.sleep(10);
+        sonicOutput.low();
 
         while (true)
         {
             Thread.sleep(500);
         }
+
     }
 
+
+        /*
+        while (true)
+        {
+            Thread.sleep(500);
+        }
+
+         */
 }
+
