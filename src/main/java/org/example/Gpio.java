@@ -161,7 +161,7 @@ public class Gpio {
             {
                 System.out.println("Sonic Start");
                 sonicOutput.low();
-                Thread.sleep(5000);
+                Thread.sleep(2);
                 sonicOutput.high();
                 Thread.sleep(10);
                 sonicOutput.low();
