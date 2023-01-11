@@ -12,7 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Gpio {
 
-    public static long distance = 0, start = 0, end = 0;
+    public static int distance = 0, start = 0, end = 0;
+    public static boolean startCheck = false, endCheck = false;
     public static boolean touched = false;
 
     public void gpio() throws InterruptedException {
@@ -38,6 +39,7 @@ public class Gpio {
 
         var input = pi4j.din().create(config);
 
+        /*
         input.addListener(e -> {
             if (e.state() == DigitalState.HIGH) {
                 end = System.currentTimeMillis();
@@ -139,32 +141,34 @@ public class Gpio {
 
         sonicInput.addListener(e -> {
                     if (e.state() == DigitalState.LOW) {
-                        start = System.nanoTime() / 1000;
+                        int i = (int)System.nanoTime();
+                        start = i / 1000;
                         console.println("time Check1 : start is " + start);
+                        startCheck = true;
                     }
                     if (e.state() == DigitalState.HIGH) {
-                        end = System.nanoTime() / 1000;
+                        int i = (int)System.nanoTime();
+                        end = i / 1000;
                         console.println("time Check2 : end is " + end);
                         distance = (end - start) / 58;
                         System.out.println("Distance " + distance + " cm");
+                        startCheck = false;
                     }
                 });
 
-        sonicOutput.low();
-        Thread.sleep(5000);
-        sonicOutput.high();
-        Thread.sleep(10);
-        sonicOutput.low();
-
         while (true)
         {
-            sonicOutput.low();
-            Thread.sleep(5000);
-            sonicOutput.high();
-            Thread.sleep(10);
-            sonicOutput.low();
+            if (startCheck == false && endCheck == false)
+            {
+                System.out.println("Sonic Start");
+                sonicOutput.low();
+                Thread.sleep(5000);
+                sonicOutput.high();
+                Thread.sleep(10);
+                sonicOutput.low();
+            }
 
-            Thread.sleep(500);
+            Thread.sleep(10000);
         }
 
     }
