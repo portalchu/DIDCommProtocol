@@ -238,4 +238,87 @@ public class Client {
         }
 
     }
+
+    public static void DIDCommSonicClient(String did) {
+        System.out.println("DIDComm Client did is " + did);
+
+        //
+        DIDCommManager didCommManager = new DIDCommManager(did);
+
+        // 클라이언트 소켓 생성
+
+        Socket socket = new Socket();
+        Scanner sc = new Scanner(System.in);
+
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        OutputStream os = null;
+        OutputStreamWriter osw = null;
+        PrintWriter pw = null;
+
+        // new InetSocketAddress(InetAddress.getLocalHost() 6077
+
+        try {
+            socket.connect(new InetSocketAddress("220.68.5.140",6077), 6077);
+            System.out.println("[client] connected with server");
+
+            Gpio.gpioButton();
+
+            while (true) {
+
+                is = socket.getInputStream();
+                isr = new InputStreamReader(is, "UTF-8");
+                br = new BufferedReader(isr);
+
+                os = socket.getOutputStream();
+                osw = new OutputStreamWriter(os, "UTF-8");
+                pw = new PrintWriter(osw, true);
+
+                // 읽는거
+                /*
+                System.out.print(">>");
+                String data = sc.nextLine();
+
+                 */
+                String data = "" + Gpio.distance;
+
+                if ("exit".equals(data))
+                    break;
+                else if (data.equals(""))
+                    break;
+
+                // DIDComm 적용 위치?
+                String encryData = didCommManager.messageEncryption(Main.serverDid, data);
+                System.out.println("encrypted message : " + encryData);
+
+                pw.println(encryData);
+
+                data = br.readLine();
+                System.out.println("<< " + data);
+
+                Thread.sleep(10000);
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (socket != null && !socket.isClosed()) {
+                    socket.close();
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            sc.close();
+
+        }
+
+    }
 }

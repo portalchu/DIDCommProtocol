@@ -32,6 +32,7 @@ public class Main {
                 System.out.println("12 : Button Test");
                 System.out.println("13 : GPIO Client Test");
                 System.out.println("14 : Sonic Test");
+                System.out.println("15 : Sonic Client Test");
                 System.out.println("0 : 종료");
 
                 System.out.println("번호 입력 : ");
@@ -89,6 +90,10 @@ public class Main {
                     case 14:
                         System.out.println("Sonic Test");
                         Gpio.gpioSonic();
+                        break;
+                    case 15:
+                        System.out.println("Sonic Client Test");
+                        Client.DIDCommSonicClient(clientDid);
                         break;
                     case 0:
                         return;
