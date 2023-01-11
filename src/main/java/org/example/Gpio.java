@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalField;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -152,7 +153,7 @@ public class Gpio {
                         int i = (int)System.nanoTime();
                         end = i / 1000;
                         console.println("time Check2 : end is " + end);
-                        distance = (end - start) / 58;
+                        distance = (end - start) / 58000;
                         System.out.println("Distance " + distance + " cm");
                         startCheck = false;
                     }
@@ -171,7 +172,8 @@ public class Gpio {
                 startCheck = true;
             }
             timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
-            console.println("time Check1 : start is " + timeSC);
+            int timeInt = timeSC.getNano();
+            console.println("time Check1 : start is " + timeInt);
             Thread.sleep(1000);
         }
 
