@@ -139,11 +139,11 @@ public class Gpio {
 
         sonicInput.addListener(e -> {
                     if (e.state() == DigitalState.LOW) {
-                        start = System.nanoTime();
+                        start = System.nanoTime() / 1000;
                         console.println("time Check1 : start is " + start);
                     }
                     if (e.state() == DigitalState.HIGH) {
-                        end = System.nanoTime();
+                        end = System.nanoTime() / 1000;
                         console.println("time Check2 : end is " + end);
                         distance = (end - start) / 58;
                         System.out.println("Distance " + distance + " cm");
@@ -158,6 +158,12 @@ public class Gpio {
 
         while (true)
         {
+            sonicOutput.low();
+            Thread.sleep(5000);
+            sonicOutput.high();
+            Thread.sleep(10);
+            sonicOutput.low();
+
             Thread.sleep(500);
         }
 
