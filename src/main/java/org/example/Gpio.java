@@ -7,6 +7,8 @@ import com.pi4j.util.Console;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -138,6 +140,7 @@ public class Gpio {
 
         final var sonicInput = pi4j.create(input);
 
+        Instant timeSC;
 
         sonicInput.addListener(e -> {
                     if (e.state() == DigitalState.LOW) {
@@ -167,7 +170,8 @@ public class Gpio {
                 sonicOutput.low();
                 startCheck = true;
             }
-
+            timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
+            console.println("time Check1 : start is " + timeSC);
             Thread.sleep(1000);
         }
 
