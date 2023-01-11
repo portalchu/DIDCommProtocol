@@ -144,7 +144,6 @@ public class Gpio {
                         int i = (int)System.nanoTime();
                         start = i / 1000;
                         console.println("time Check1 : start is " + start);
-                        startCheck = true;
                     }
                     if (e.state() == DigitalState.HIGH) {
                         int i = (int)System.nanoTime();
@@ -166,9 +165,10 @@ public class Gpio {
                 sonicOutput.high();
                 Thread.sleep(10);
                 sonicOutput.low();
+                startCheck = true;
             }
 
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         }
 
     }
