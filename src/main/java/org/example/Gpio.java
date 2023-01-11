@@ -19,6 +19,8 @@ public class Gpio {
     public static boolean startCheck = false, endCheck = false;
     public static boolean touched = false;
 
+    public static Instant timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
+
     public void gpio() throws InterruptedException {
 
         var pi4j = Pi4J.newAutoContext();
@@ -141,19 +143,17 @@ public class Gpio {
 
         final var sonicInput = pi4j.create(input);
 
-        Instant timeSC;
-
         sonicInput.addListener(e -> {
                     if (e.state() == DigitalState.LOW) {
-                        int i = (int)System.nanoTime();
-                        start = i / 1000;
+                        timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
+                        start = timeSC.getNano() / 1000;
                         console.println("time Check1 : start is " + start);
                     }
                     if (e.state() == DigitalState.HIGH) {
-                        int i = (int)System.nanoTime();
-                        end = i / 1000;
+                        timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
+                        end = timeSC.getNano() / 1000;
                         console.println("time Check2 : end is " + end);
-                        distance = (end - start) / 58000;
+                        distance = (end - start) / 58;
                         System.out.println("Distance " + distance + " cm");
                         startCheck = false;
                     }
@@ -171,9 +171,6 @@ public class Gpio {
                 sonicOutput.low();
                 startCheck = true;
             }
-            timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
-            int timeInt = timeSC.getNano();
-            console.println("time Check1 : start is " + timeInt);
             Thread.sleep(1000);
         }
 
