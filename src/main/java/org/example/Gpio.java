@@ -144,12 +144,12 @@ public class Gpio {
         final var sonicInput = pi4j.create(input);
 
         sonicInput.addListener(e -> {
-                    if (e.state() == DigitalState.LOW) {
+                    if (e.state() == DigitalState.HIGH) {
                         timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
                         start = timeSC.getNano() / 1000;
                         console.println("time Check1 : start is " + start);
                     }
-                    if (e.state() == DigitalState.HIGH) {
+                    if (e.state() == DigitalState.LOW) {
                         timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
                         end = timeSC.getNano() / 1000;
                         console.println("time Check2 : end is " + end);
