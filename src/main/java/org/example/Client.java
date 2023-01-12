@@ -264,7 +264,8 @@ public class Client {
             socket.connect(new InetSocketAddress("220.68.5.140",6077), 6077);
             System.out.println("[client] connected with server");
 
-            Gpio.gpioButton();
+            Gpio gpio = new Gpio();
+            gpio.gpioSonicSetup();
 
             while (true) {
 
@@ -282,7 +283,9 @@ public class Client {
                 String data = sc.nextLine();
 
                  */
+                gpio.gpioSonicCheck();
                 String data = "" + Gpio.distance;
+                System.out.println("data : " + data);
 
                 if ("exit".equals(data))
                     break;

@@ -1,6 +1,7 @@
 package org.example;
 
 import com.pi4j.Pi4J;
+import com.pi4j.context.Context;
 import com.pi4j.io.gpio.digital.*;
 import com.pi4j.platform.Platforms;
 import com.pi4j.util.Console;
@@ -18,6 +19,10 @@ public class Gpio {
     public static int distance = 0, start = 0, end = 0;
     public static boolean startCheck = false, endCheck = false;
     public static boolean touched = false;
+
+    public DigitalOutput sonicOutput;
+    public DigitalInput sonicInput;
+    public Context sonicPi4j;
 
     public static Instant timeSC = Instant.now().truncatedTo(ChronoUnit.MICROS);
 
@@ -110,12 +115,12 @@ public class Gpio {
          */
     }
 
-    public static void gpioSonic() throws InterruptedException {
+    public void gpioSonicSetup() throws InterruptedException {
 
-        var pi4j = Pi4J.newAutoContext();
+        sonicPi4j = Pi4J.newAutoContext();
 
         Console console = new Console();
-        Platforms platforms = pi4j.platforms();
+        Platforms platforms = sonicPi4j.platforms();
         console.box("Pi4J PLATFORMS");
         console.println();
         platforms.describe().print(System.out);
@@ -123,7 +128,7 @@ public class Gpio {
 
         long DEBOUNC = 3000L;
 
-        DigitalOutputConfig output = DigitalOutput.newConfigBuilder(pi4j).id("SonicO")
+        DigitalOutputConfig output = DigitalOutput.newConfigBuilder(sonicPi4j).id("SonicO")
                 .name("SonicOut")
                 .address(23)
                 .shutdown(DigitalState.LOW)
@@ -131,9 +136,9 @@ public class Gpio {
                 .provider("pigpio-digital-output")
                 .build();
 
-        final var sonicOutput = pi4j.create(output);
+        sonicOutput = sonicPi4j.create(output);
 
-        DigitalInputConfig input = DigitalInput.newConfigBuilder(pi4j).id("SonicI")
+        DigitalInputConfig input = DigitalInput.newConfigBuilder(sonicPi4j).id("SonicI")
                 .name("Button")
                 .address(24)
                 .debounce(DEBOUNC)
@@ -141,7 +146,7 @@ public class Gpio {
                 .provider("pigpio-digital-input")
                 .build();
 
-        final var sonicInput = pi4j.create(input);
+        sonicInput= sonicPi4j.create(input);
 
         sonicInput.addListener(e -> {
                     if (e.state() == DigitalState.HIGH) {
@@ -159,6 +164,7 @@ public class Gpio {
                     }
                 });
 
+        /*
         while (true)
         {
             if (startCheck == false && endCheck == false)
@@ -174,9 +180,19 @@ public class Gpio {
             Thread.sleep(1000);
         }
 
+         */
+
     }
 
-
+    public void gpioSonicCheck() throws InterruptedException {
+        System.out.println("Sonic Start");
+        sonicOutput.low();
+        Thread.sleep(2);
+        sonicOutput.high();
+        Thread.sleep(10);
+        sonicOutput.low();
+        startCheck = true;
+    }
         /*
         while (true)
         {

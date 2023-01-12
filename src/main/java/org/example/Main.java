@@ -89,7 +89,8 @@ public class Main {
                         break;
                     case 14:
                         System.out.println("Sonic Test");
-                        Gpio.gpioSonic();
+                        gpio.gpioSonicSetup();
+                        gpio.gpioSonicCheck();
                         break;
                     case 15:
                         System.out.println("Sonic Client Test");
