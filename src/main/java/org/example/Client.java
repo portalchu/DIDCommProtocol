@@ -284,7 +284,7 @@ public class Client {
 
                  */
                 gpio.gpioSonicCheck();
-                String data = "" + Gpio.distance;
+                String data = "" + Gpio.distance + "cm";
                 System.out.println("data : " + data);
 
                 if ("exit".equals(data))
